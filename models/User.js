@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+// User Schema
 const userSchema = new Schema(
     {
         username: {
@@ -17,6 +18,7 @@ const userSchema = new Schema(
             match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email address']
         }
     },
+    // array for thoughts and friends
     {
         thoughts: [
             {
@@ -40,3 +42,16 @@ const userSchema = new Schema(
         id: false,
     }
 );
+
+
+// virtual for counting friends
+userSchema.virtual('friendCount').get(
+    function() {
+        return this.friends.length;
+    }
+);
+
+
+const User = model('user', userSchema);
+
+module.exports = User;
