@@ -50,7 +50,8 @@ module.exports = {
         // find user by id, update req.body
         const user = await User.findOneandUpdate({ _id: req.params.userId },
           {$set: req.body},
-          {new: true}
+          {new: true},
+          { runValidators: true }
         )
 
         if (!user) {
@@ -89,7 +90,8 @@ module.exports = {
       // update user by id, add friend id
       const user = await User.findOneandUpdate({ _id: req.params.userId },
         { $addToSet: { friends: req.params.friendId } },
-        {new: true}
+        {new: true},
+        { runValidators: true }
       );
 
       if (!user) {
@@ -109,7 +111,8 @@ module.exports = {
         // update user by id, delete friend id
         const user = await User.findOneAndUpdate({ _id: req.params.userId },
           { $pull: { friends: req.params.friendId } },
-          {new: true}
+          {new: true},
+          { runValidators: true }
         );
 
         if (!user) {

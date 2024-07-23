@@ -38,7 +38,8 @@ module.exports = {
             // find user and add thought to user
             const user = await User.findOneAndUpdate( { _id: req.params.userId },
                 { $addToSet: { thoughts: thought._id } },
-                {new: true}
+                {new: true},
+                { runValidators: true }
             )
 
             if (!user) {
@@ -57,8 +58,9 @@ module.exports = {
         try {
             // find thought by id and set req.body
             const thought = await Thought.findOneandUpdate({ _id: req.params.thuoghtId },
-            {$set: req.body},
-            {new: true}
+                {$set: req.body},
+                {new: true},
+                { runValidators: true }
             )
 
             if (!thought) {
@@ -95,7 +97,8 @@ module.exports = {
         // find thought by id and add reaction to thought
         const thought = await Thought.findOneandUpdate({ _id: req.params.thoughtId },
             { $addToSet: { reactions: req.body } },
-            {new: true}
+            {new: true},
+            { runValidators: true }
         );
 
         if (!thought) {
@@ -114,12 +117,13 @@ module.exports = {
         try{
             // find thought by id and remove reaction by id from thought
             const thought = await Thought.findOneAndUpdate({ _id: req.params.thoughtId },
-            { $pull: { reactions: req.params.reactionId } },
-            {new: true}
+                { $pull: { reactions: req.params.reactionId } },
+                {new: true},
+                { runValidators: true }
             );  
 
             if (!thought) {
-            return res.status(404).json({ message: "No thought with this id!" });
+                return res.status(404).json({ message: "No thought with this id!" });
             }   
 
             res.json(thought);
