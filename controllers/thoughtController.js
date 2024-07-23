@@ -55,6 +55,7 @@ module.exports = {
   // update thought
     async updateThought (req, res) {
       try{
+        // find thought by id and set req.body
         const thought = await Thought.findOneandUpdate({ _id: req.params.thuoghtId },
           {$set: req.body},
           {new: true}
@@ -72,12 +73,13 @@ module.exports = {
 
 
   // delete thought
-    async deleteUser (req, res) {
+    async deleteThought (req, res) {
       try{
+        // delete thought by id
         const thought = await Thought.findOneAndDelete({ _id: req.params.thoughtId });
 
         if (!thought) {
-          return res.status(404).json({ message: "No user with this id!" });
+          return res.status(404).json({ message: "No thought with this id!" });
         }
 
         res.status(200).json({ message: `Thought has been deleted`})
