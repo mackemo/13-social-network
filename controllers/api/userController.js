@@ -13,7 +13,7 @@ module.exports = {
     },
 
 
-  // retrieve a single user
+  // retrieve single user
     async getSingleUser (req, res) {
       try {
         const user = await User.findOne({ _id: req.params.userId })
@@ -33,7 +33,7 @@ module.exports = {
     },
 
   
-  // create a new user
+  // create new user
     async createUser (req, res) {
       try{
         const userData = await User.create(req.body);
@@ -41,6 +41,42 @@ module.exports = {
       } catch (err) {
         res.status(500).json(err);
       }
-    }
-    
+    },
+
+
+  // update user
+    async updateUser (req, res) {
+      try{
+        const user = await User.findOneandUpdate({ _id: req.params.userId },
+          {$set: req.body},
+          {new: true}
+        )
+
+        if (!user) {
+          return res.status(404).json({ message: "No user with this id!" });
+        }
+
+        res.json(user);
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    },
+
+
+  // delete user
+    async deleteUser (req, res) {
+      try{
+        const user = await User.findOneAndDelete({ _id: req.params.userId });
+
+        if (!user) {
+          return res.status(404).json({ message: "No user with this id!" });
+        }
+
+        await Thought.deleteMany({ _id: { $in: user.thoughts } });
+        res.status(200).json({ message: `${user.username} has been deleted`})
+      } catch (err) {
+        res.status(500).json(err);
+      }
+    },
 };
+
