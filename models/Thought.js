@@ -9,25 +9,25 @@ const thoughtSchema = new Schema(
             required: true,
             minlength: 1,
             maxlength: 280
-        }
-    },
-    {
+        },
+    
+    
         createdAt: {
             type: Date,
-            default: Date.now,
+            default: Date.now(),
             // formatting date to local time
             get: function(timestamp) {
                 return new Date(timestamp).toLocaleString();
             }
-        }
-    },
-    {
+        },
+    
+
         username: {
             type: String,
             required: true
-        }
-    },
-    {
+        },
+    
+    
         reactions: [
             // using reaction schema for reactions
             reactionSchema
