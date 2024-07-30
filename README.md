@@ -19,11 +19,14 @@ The thirteenth challenge assignment from a bootcamp where the task was to build 
 -[Acknowledgement](#Acknowledgement)
 -[Questions](#Questions)
 
-<img src=""/>
-<img src=""/>
-<img src=""/>
-<img src=""/>
-
+<img src="./assets/ss1.png"/>
+Retrieving all Users
+<img src="./assets/ss2.png"/>
+Deleting a User
+<img src="./assets/ss3.png"/>
+Retrieving all Thoughts
+<img src="./assets/ss4.png"/>
+Adding a Friend
 
 
 ## Process
@@ -31,7 +34,8 @@ The process included creating a connection with mongoose and express. Three mode
 
 
 ## Links
-Link to walkthrough: 
+Link to walkthrough: https://drive.google.com/file/d/1N4CSPskwOIT0OLARWuOWCPSxcj2mDs1A/view?usp=drive_link
+
 
 ## Installation
 To install this application, copy the ssh key from my github repo and clone it into your respository. Do an npm install. Run the schema file as well as the command 'npm run seed' to seed the database. Then, 'npm start', to start the server.
